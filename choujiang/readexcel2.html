@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+ <head>  
+  <title> New Document </title>  
+  <meta name="Generator" content="EditPlus">  
+  <meta name="Author" content="">  
+  <meta name="Keywords" content="">  
+  <meta name="Description" content="">  
+  <script type="text/javascript">  
+        function ReadExcel() {  
+           var tempStr = "";  
+           //得到文件路径的值  
+           var filePath = document.getElementById("upfile").value; 
+           var sheet_id=1; //读取第1个表 
+           var row_start=2; //从第3行开始读取
+           //创建操作EXCEL应用程序的实例  windows IE浏览器才能用
+           // var oXL = new ActiveXObject("Excel.application"); 
+           //对各浏览器的兼容
+			try{  
+			  if (window.ActiveXObject){  
+			    oXL= new ActiveXObject("Microsoft.XMLDOM");  
+			    oXL.async = false;    
+			    isLoaded = oXL.load(aXMLFileName);   
+			  }   
+			  else if  
+			     (document.implementation&& document.implementation.createDocument){  
+			        try{    
+			            oXL = document.implementation.createDocument('', '', null);    
+			            oXL.async = false;    
+			            oXL.load(aXMLFileName);    
+			        } catch(e){    
+			            var xmlhttp = new window.XMLHttpRequest();    
+			            xmlhttp.open("GET",aXMLFileName,false);    
+			            xmlhttp.send(null);    
+			            oXL = xmlhttp.responseXML;    
+			        }    
+			  }  
+			  else{  
+			      alert("load data error");  
+			  }  
+			  }  
+			  catch(e){  
+			    alert(e.message);  
+			  }  
+            //打开指定路径的excel文件  
+           var oWB = oXL.Workbooks.open(filePath);  
+           //操作第一个sheet(从一开始，而非零)  
+           oWB.worksheets(sheet_id).select();  
+           var oSheet = oWB.ActiveSheet;  
+           //使用的行数  
+           var rows =  oSheet.usedrange.rows.count;   
+           try {  
+           		//读取第1、2列内容
+              for (var i = row_start; i <= rows; i++) {  
+                 if (oSheet.Cells(i, 1).value == "null" || oSheet.Cells(i, 2).value == "null") break;  
+                 var a = oSheet.Cells(i, 1).value.toString() == "undefined" ? "": oSheet.Cells(i, 1).value;  
+                 tempStr += (" " + oSheet.Cells(i, 1).value + " " + oSheet.Cells(i, 2).value + "\n");  
+              }  
+           } catch(e) {  
+              document.getElementById("txtArea").value = tempStr;  
+           }  
+           document.getElementById("txtArea").value = tempStr;  
+           //退出操作excel的实例对象  
+           oXL.Application.Quit();  
+            //手动调用垃圾收集器  
+           CollectGarbage();  
+        }  
+  </script>  
+ </head>  
+  
+ <body>  
+  <input type="file" id="upfile" /><input type="button" onclick="ReadExcel();" value="read">  
+<br>  
+<textarea id="txtArea" cols=50 rows=10></textarea>  
+ </body>  
+</html> 

@@ -1,0 +1,15 @@
+{
+  "name": "lesson2",
+  "version": "1.0.0",
+  "description": "ceshi",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "clm",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "utility": "^1.11.0"
+  }
+}

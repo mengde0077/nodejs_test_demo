@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>js中的Ajax经典示例</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+$("button").click(function(){
+  $.ajax({
+    async: false,
+    type: "GET",
+    dataType: 'jsonp',
+    jsonp: 'callback',
+    jsonpCallback: 'callbackfunction',
+    url: "http://127.0.0.1:3000/data",
+    data: "",
+    timeout: 3000,
+    contentType: "application/json;utf-8",
+    success: function(msg) {
+      console.log(msg);
+    }
+  });
+})
+
+    </script>
+</head>
+<body>
+      
+      <div id="resText"></div>
+      <form method=get action="">
+        <input type="button" value="测试"  onclick=""/>
+      </form>
+</body>
+</html>

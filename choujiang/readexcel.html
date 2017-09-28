@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+ <head>  
+  <title> New Document </title>  
+  <meta name="Generator" content="EditPlus">  
+  <meta name="Author" content="">  
+  <meta name="Keywords" content="">  
+  <meta name="Description" content="">  
+  <script type="text/javascript" lang="javascript" src="dist/xlsx.core.min.js">  
+        function ReadExcel() {  
+           var tempStr = "";  
+           //得到文件路径的值  
+           var filePath = document.getElementById("upfile").value; 
+           var sheet_id=1; //读取第1个表 
+           var row_start=2; //从第3行开始读取 
+            //打开指定路径的excel文件  
+           workbook ＝ XLSX.writeFile('orderlist.xls', opts); 
+           //操作第一个sheet(从一开始，而非零)  
+           var worksheet = workbook.Sheets[sheetNames[sheet_id]];  
+            workbook.SheetNames.forEach(function(sheetName) {
+              var worksheet = workbook.Sheets[sheetName];
+              result[sheetName] = XLSX.utils.sheet_to_json(worksheet);
+            }); 
+          
+            console.log("打印表信息",JSON.stringify(result, 2, 2));  //显示格式{"表1":[],"表2":[]}
+            return result; 
+        }  
+  </script>  
+ </head>  
+  
+ <body>  
+  <input type="file" id="upfile" /><input type="button" onclick="ReadExcel();" value="read">  
+<br>  
+<textarea id="txtArea" cols=50 rows=10></textarea>  
+ </body>  
+</html> 

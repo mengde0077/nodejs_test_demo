@@ -1,0 +1,16 @@
+{
+  "name": "lesson17",
+  "version": "1.0.0",
+  "description": "promise test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "clm",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "promiseclass": "^1.0.3",
+    "q": "^1.4.1"
+  }
+}
